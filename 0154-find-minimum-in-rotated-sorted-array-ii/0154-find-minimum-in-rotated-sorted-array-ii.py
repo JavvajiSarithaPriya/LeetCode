@@ -6,11 +6,14 @@ class Solution(object):
         while low < high:
             mid = (low + high) // 2
 
+            if nums[low] == nums[mid] == nums[high]:
+                low += 1
+                high -= 1
+                continue
+
             if nums[mid] > nums[high]:
                 low = mid + 1
-            elif nums[mid] < nums[high]:
-                high = mid
             else:
-                high -= 1   # duplicates case
+                high = mid
 
         return nums[low]
