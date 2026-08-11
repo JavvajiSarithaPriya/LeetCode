@@ -2,43 +2,19 @@ class Solution(object):
     def setZeroes(self, matrix):
         """
         :type matrix: List[List[int]]
-        :rtype: None
+        :rtype: None Do not return anything, modify matrix in-place instead.
         """
-
-        rows = len(matrix)
-        cols = len(matrix[0])
-
-        # Check first row and first column
-        first_row_zero = False
-        first_col_zero = False
-
-        for j in range(cols):
-            if matrix[0][j] == 0:
-                first_row_zero = True
-
-        for i in range(rows):
-            if matrix[i][0] == 0:
-                first_col_zero = True
-
-        # Mark rows and columns
-        for i in range(1, rows):
-            for j in range(1, cols):
-                if matrix[i][j] == 0:
-                    matrix[i][0] = 0
-                    matrix[0][j] = 0
-
-        # Set zeroes
-        for i in range(1, rows):
-            for j in range(1, cols):
-                if matrix[i][0] == 0 or matrix[0][j] == 0:
-                    matrix[i][j] = 0
-
-        # First row
-        if first_row_zero:
+        row=len(matrix)
+        cols=len(matrix[0])
+        row_z=[False]*row
+        col_z=[False]*cols
+        for i in range(row):
             for j in range(cols):
-                matrix[0][j] = 0
-
-        # First column
-        if first_col_zero:
-            for i in range(rows):
-                matrix[i][0] = 0
+                if matrix[i][j]==0:
+                    row_z[i]=True
+                    col_z[j]=True
+        for i in range(row):
+            for j in range(cols):
+                if row_z[i] or col_z[j]:
+                    matrix[i][j]=0
+        return matrix
