@@ -4,11 +4,15 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        cnt=0
+        '''cnt=0
         for i in range(0,len(nums)+1):
             if i in nums:
                 cnt+=1
             else:
                 return i
-                break
+                break'''
+        n=len(nums)
+        sums=n*(n+1)//2
+        a=sum(nums)
+        return sums-a
         
