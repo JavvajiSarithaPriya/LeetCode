@@ -4,15 +4,15 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        n=len(nums)
+        ans=[-1]*len(nums)
         stack=[]
-        res=[-1]*n
+        n=len(nums)
         for i in range(2*n-1,-1,-1):
-            cur=nums[i%n]
-            while stack and stack[-1]<=cur:
+            while stack and stack[-1]<=nums[i%n]:
                 stack.pop()
             if i<n:
                 if stack:
-                    res[i]=stack[-1]
-            stack.append(cur)
-        return res        
+                    ans[i]=stack[-1]
+            stack.append(nums[i%n])
+        return ans
+        
