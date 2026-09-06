@@ -1,25 +1,38 @@
 class Solution(object):
     def trap(self, height):
-        n = len(height)
-        if n == 0:
-            return 0
-
-        leftmax = [0] * n
-        rightmax = [0] * n
-
-        # Prefix max
-        leftmax[0] = height[0]
-        for i in range(1, n):
-            leftmax[i] = max(leftmax[i-1], height[i])
-
-        # Suffix max
-        rightmax[n-1] = height[n-1]
-        for i in range(n-2, -1, -1):
-            rightmax[i] = max(rightmax[i+1], height[i])
-
-        # Calculate trapped water
-        water = 0
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        '''n=len(height)
+        lm=[0]*n
+        rm=[0]*n
+        lm[0]=height[0]
+        for i in range(1,n):
+            lm[i]=max(lm[i-1],height[i])
+        rm[n-1]=height[n-1]
+        for i in range(n-2,-1,-1):
+            rm[i]=max(rm[i+1],height[i])
+        total=0
         for i in range(n):
-            water += min(leftmax[i], rightmax[i]) - height[i]
-
+            total+=max((min(lm[i],rm[i]))-height[i],0)
+        return total'''
+        left=0
+        right=len(height)-1
+        leftmax=0
+        rightmax=0
+        water=0
+        while left<=right:
+            if height[left]<=height[right]:
+                if height[left]>=leftmax:
+                    leftmax=height[left]
+                else:
+                    water+=leftmax-height[left]
+                left+=1
+            else:
+                if height[right]>=rightmax:
+                    rightmax=height[right]
+                else:
+                    water+=rightmax-height[right]
+                right-=1
         return water
