@@ -5,18 +5,21 @@ class Solution(object):
         :rtype: List[int]
         """
         stack=[]
-        for a in asteroids:
-            alive=True
-            while stack and alive and stack[-1]>0 and a<0:
-                if abs(stack[-1])<abs(a):
+        for asa in asteroids:
+            while stack and stack[-1]>0 and asa<0:
+
+                if stack[-1]<abs(asa):
                     stack.pop()
-                elif abs(stack[-1]) == abs(a):
+                    continue
+                elif stack[-1]==abs(asa):
                     stack.pop()
-                    alive=False
+                    asa=0
+                    break
                 else:
-                    alive=False
-        if alive:
-            stack.append(a)
+                    asa=0
+                    break
+            if asa!=0:
+                stack.append(asa)
         return stack
 
         
