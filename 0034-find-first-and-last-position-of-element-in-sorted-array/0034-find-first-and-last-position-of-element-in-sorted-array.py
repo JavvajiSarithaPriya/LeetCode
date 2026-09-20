@@ -1,39 +1,36 @@
-class Solution(object):
+class Solution:
     def searchRange(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: List[int]
-        """
-        def lower_bound(nums,target):
-            low=0
-            high=len(nums)-1
-            ans=len(nums)
-            while low<=high:
-                mid=(low+high)//2
-                if nums[mid]>=target:
-                    ans=mid
-                    high=mid-1
-                else:
-                    low=mid+1
-            return ans
-        def upper_bound(nums,target):
-            low=0
-            high=len(nums)-1
-            ans=len(nums)
-            while low<=high:
-                mid=(low+high)//2
-                if nums[mid]>target:
-                    ans=mid
-                    high=mid-1
-                else:
-                    low=mid+1
-            return ans
-        first=lower_bound(nums,target)
-        if first==len(nums) or nums[first]!=target:
-            return [-1,-1]
-        last=upper_bound(nums,target)-1
-        return [first,last]
-                
-                
-        
+
+        # Find first occurrence
+        left = 0
+        right = len(nums) - 1
+        first = -1
+
+        while left <= right:
+            mid = (left + right) // 2
+
+            if nums[mid] == target:
+                first = mid
+                right = mid - 1
+            elif nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+
+        # Find last occurrence
+        left = 0
+        right = len(nums) - 1
+        last = -1
+
+        while left <= right:
+            mid = (left + right) // 2
+
+            if nums[mid] == target:
+                last = mid
+                left = mid + 1
+            elif nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+
+        return [first, last]
