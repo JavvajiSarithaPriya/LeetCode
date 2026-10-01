@@ -1,20 +1,11 @@
-class Solution(object):
+class Solution:
     def findTheDifference(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: str
-        """
-        freq={}
-        for ch in s:
-            if ch in freq:
-                freq[ch]=freq[ch]+1
-            else:
-                freq[ch]=1
-        for ch in t:
-            if ch in freq and freq[ch]>0:
-                freq[ch]-=1
-            else:
-                return ch
+        result = 0
 
-        
+        for ch in s:
+            result ^= ord(ch)
+
+        for ch in t:
+            result ^= ord(ch)
+
+        return chr(result)
